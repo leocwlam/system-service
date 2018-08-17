@@ -1,0 +1,34 @@
+{
+  "name": "system-service",
+  "version": "0.0.0-development",
+  "description": "> Provide the basic service framework to help initial service implementation.  It can be easy to inject any message framework and has built-in logging mechanism.",
+  "main": "dist/system-service.min.js",
+  "scripts": {
+    "test": "standard && nyc --report=html --reporter=text mocha tests",
+    "test-continue": "mocha tests --recursive --watch",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "build": "uglifyjs src/*.js -c -m -o dist/system-service.min.js --source-map \"filename='dist/system-service.min.js.map'\""
+  },
+  "author": "Leo Lam <leocwlam@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leocwlam/system-service/issues"
+  },
+  "homepage": "https://github.com/leocwlam/system-service#readme",
+  "dependencies": {
+    "system-logger": "^2.0.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.3.0",
+    "eslint-plugin-node": "^7.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "semantic-release": "^15.9.8",
+    "sinon": "^6.1.5",
+    "standard": "^11.0.1",
+    "uglify-es": "^3.3.9"
+  }
+}
