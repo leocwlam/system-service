@@ -9,6 +9,10 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "uglifyjs src/*.js -c -m -o dist/system-service.min.js --source-map \"filename='dist/system-service.min.js.map'\""
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leocwlam/system-service.git"
+  },
   "author": "Leo Lam <leocwlam@gmail.com>",
   "license": "MIT",
   "bugs": {
