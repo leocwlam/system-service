@@ -58,10 +58,15 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | stop   | Service stop to receive message  |
 
 # <a name="diagram"></a>Diagram
+
 | Layout |
 |--------|
-|<img align="middle" src="./system-service.png" />|
+|<div align="center"><img src="./docs/system-service.png" /></div>|
 
+- Inside handling
+| Workflow |
+|----------|
+|<div align="center"><img src="./docs/workflow.png" /></div>|
 
 # <a name="get-start"></a>Get Start
 Setup message cosumer
@@ -71,14 +76,14 @@ const mq = require('amqplib/callback_api')
 const systemService = require('system-service')
 const { MessageConsumer } = systemService
 
-function errHandle(err) {
+function errHandler(err) {
   // TODO: logging or exist ...
 }
 
 function MQConnect(conn, queueName, handler) {
   const on_open =  function (err, ch) {
     if (err !== null) {
-      errHandle(err)
+      errHandler(err)
     } else {
       ch.assertQueue(queueName)
       ch.consume(queueName, function(msg) {
@@ -108,7 +113,7 @@ class DemoConsumer extends MessageConsumer {
     super.create()
     mq.connect(this.uri, function(err, conn) {
       if (err !== null) {
-        errHandle(err);
+        errHandler(err);
       } else {
         this.conn = conn
 
