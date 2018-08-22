@@ -17,6 +17,7 @@
 <p align="center">
     <a href="#install">Install</a> &bull;
     <a href="#definition">Definition</a> &bull;
+    <a href="#diagram">Diagram</a> &bull;
     <a href="#get-start">Get Start</a> &bull;
     <a href="#license">License</a>
 </p>
@@ -56,9 +57,10 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | start  | Service start to receive message |
 | stop   | Service stop to receive message  |
 
-| Diagram |
-|---------|
-|<img align="middle" src="https://github.com/leocwlam/system-service/blob/master/system-service.png" />|
+# <a name="diagram"></a>Diagram
+| Layout |
+|--------|
+|<img align="middle" src="./system-service.png" />|
 
 
 # <a name="get-start"></a>Get Start
@@ -150,7 +152,7 @@ const { SystemService, Logger } = systemService
 const config = {log: {config :{level: Logger.Level.error}}}
 const service = new SystemService(config, new DemoConsumer())
 
-service.start();
+service.start()
 ```
 
 # <a name="license"></a>License
