@@ -1,6 +1,7 @@
 # system-service
 > Provide the basic service framework to help initial service implementation.  It can be easy to inject any message framework and has built-in logging mechanism.
 
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/leocwlam/system-service/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/leocwlam/system-service.svg?branch=master)](https://travis-ci.org/leocwlam/system-service)
 [![Coverage Status](https://coveralls.io/repos/github/leocwlam/system-service/badge.svg?branch=master)](https://coveralls.io/github/leocwlam/system-service?branch=master)
 [![Dependency Status](https://david-dm.org/leocwlam/system-service.svg)](https://david-dm.org/leocwlam/system-service)
@@ -11,9 +12,16 @@
 [![npm badge](https://img.shields.io/npm/v/system-service/latest.svg)](https://www.npmjs.com/package/system-service)
 
 # Contents
-* [Install](#install)
-* [Definition](#definition)
-* [Get Start](#get-start)
+-------
+
+<p align="center">
+    <a href="#install">Install</a> &bull;
+    <a href="#definition">Definition</a> &bull;
+    <a href="#get-start">Get Start</a> &bull;
+    <a href="#license">License</a>
+</p>
+
+-------
 
 # <a name="install"></a>Install
 **Install via npm:**
@@ -47,6 +55,11 @@ const { SystemService, Logger, MessageConsumer } = systemService
 |--------|----------------------------------|
 | start  | Service start to receive message |
 | stop   | Service stop to receive message  |
+
+| Diagram |
+|---------|
+|<img align="middle" src="https://github.com/leocwlam/system-service/blob/master/system-service.png" />|
+
 
 # <a name="get-start"></a>Get Start
 Setup message cosumer
@@ -140,3 +153,6 @@ const service = new SystemService(config, new DemoConsumer())
 
 service.start();
 ```
+
+# <a name="license"></a>License
+MIT

@@ -63,6 +63,9 @@ typings/
 # package-lock
 package-lock.json
 
+# Filter merge conflict file
+*.orig
+
 # src
 src/
 
