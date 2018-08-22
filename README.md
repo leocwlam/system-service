@@ -64,6 +64,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 |<div align="center"><img src="./docs/system-service.png" /></div>|
 
 - Inside handling
+
 | Workflow |
 |----------|
 |<div align="center"><img src="./docs/workflow.png" /></div>|
