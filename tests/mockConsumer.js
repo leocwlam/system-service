@@ -35,8 +35,8 @@ class MockConsumer extends MessageConsumer {
     this.simpleTimer = setTimeout(() => { this.internalProcess() }, 500)
   }
 
-  create (systemService) {
-    super.create(systemService)
+  create () {
+    super.create()
     this.internalProcess()
     this.createBehavior()
   }

@@ -39,14 +39,14 @@ const { SystemService, Logger, MessageConsumer } = systemService
 ## MessageConsumer
 - MessageConsumer is base class, which uses for connecting with SystemService.  The derived class can be overwritten by the following methods:
 
-| Method   | Description                                                                                                                         |
-|----------|-------------------------------------------------------------------------------------------------------------------------------------|
-| create   | Implement to connect the 3rd party consumer (e.g. RabbitMQ, kafka, etc) with callback to this.systemService.processMessage(message) |
-| validate | Implement custom validation for any received message. If the message is invalid, then throw exception (or external handling)        |
-| process  | Implement how to prcoess the valid message                                                                                          |
-| start    | Implement to start the 3rd party consumer                                                                                           |
-| stop     | Implement how to stop the 3rd party consumer to pickup any message                                                                  |
-| cleanup  | Implement any cleanup after messageConsumer's stop method is triggered                                                              |
+| Method   | Description                                                                                                                  |
+|----------|------------------------------------------------------------------------------------------------------------------------------|
+| create   | Implement to connect the 3rd party consumer (e.g. RabbitMQ, kafka, etc) with callback to this.systemService.processMessage   |
+| validate | Implement custom validation for any received message. If the message is invalid, then throw exception (or external handling) |
+| process  | Implement how to prcoess the valid message                                                                                   |
+| start    | Implement to start the 3rd party consumer                                                                                    |
+| stop     | Implement how to stop the 3rd party consumer to pickup any message                                                           |
+| cleanup  | Implement any cleanup after messageConsumer's stop method is triggered                                                       |
 
 ## SystemService
 - SystemService is a message engine, which handles start and terminate the consumer
@@ -70,25 +70,25 @@ const systemService = require('system-service')
 const { MessageConsumer } = systemService
 
 function errHandle(err) {
-	// TODO: logging or exist ...
+  // TODO: logging or exist ...
 }
 
 function MQConnect(conn, queueName, handler) {
-	const on_open =  function (err, ch) {
-		if (err !== null) {
-			errHandle(err)
-		} else {
-			ch.assertQueue(queueName)
-			ch.consume(queueName, function(msg) {
-				if (msg !== null) {
-					handler(msg);
-					ch.ack(msg);
-				}
-			})
-		}
-	}
+  const on_open =  function (err, ch) {
+    if (err !== null) {
+      errHandle(err)
+    } else {
+      ch.assertQueue(queueName)
+      ch.consume(queueName, function(msg) {
+        if (msg !== null) {
+          handler(msg);
+          ch.ack(msg);
+        }
+      })
+    }
+  }
 
-	return on_open
+  return on_open
 }
 
 class DemoConsumer extends MessageConsumer {
@@ -96,35 +96,34 @@ class DemoConsumer extends MessageConsumer {
   const QUEUENAME = 'Demo'
   constructor () {
     super()
-		this.uri =  URI
-		this.queueName = QUEUENAME
-		this.conn = null
-		this.on_open = null
+    this.uri =  URI
+    this.queueName = QUEUENAME
+    this.conn = null
+    this.on_open = null
   }
 
-  create (systemService) {
-    super.create(systemService)
-		mq.connect(this.uri, function(err, conn) {
-			if (err !== null) {
-				errHandle(err);
-			} else {
-				this.conn = conn
+  create () {
+    super.create()
+    mq.connect(this.uri, function(err, conn) {
+      if (err !== null) {
+        errHandle(err);
+      } else {
+        this.conn = conn
 
-				// config the mq consume to call this.systemService.processMessage
-				this.on_open =  MQConnect(conn, this.queueName, this.systemService.processMessage);
-			}
-		});
-
+        // config the mq consume to call this.systemService.processMessage
+        this.on_open =  MQConnect(conn, this.queueName, this.systemService.processMessage);
+      }
+    })
   }
 
   validate (message) {
     super.validate(message)
     if ((message.cId === null) || (typeof message.cId === 'undefined')) {
-    	throw new Error('Missing Correlation Id')
+      throw new Error('Missing Correlation Id')
     }
   }
 
-	// process will only be called, when message is valid
+  // process will only be called, when message is valid
   process (message) {
     super.process(message)
     // TODO: Implement handle message
@@ -133,11 +132,11 @@ class DemoConsumer extends MessageConsumer {
 
   start () {
     super.start()
-		const ok = this.conn.createChannel(this.on_open)
+    const ok = this.conn.createChannel(this.on_open)
 
-		if (ok === null) {
-			errHandle(new Error('Fail: To create MQ channel'))
-		}
+    if (ok === null) {
+      errHandle(new Error('Fail: To create MQ channel'))
+    }
   }
 }
 

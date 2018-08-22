@@ -57,7 +57,7 @@ class SystemService {
 
   start () {
     this.logger.log('info', 'Create consumer')
-    this.messageConsumer.create(this)
+    this.messageConsumer.setup(this)
     this.logger.log('info', 'Init consumer monitor')
     this.messageConsumer.start()
     this.logger.log('info', 'SystemService started')

@@ -6,16 +6,20 @@ class MessageConsumer {
     this.logger = null
   }
 
+  setup (systemService) {
+    this.systemService = systemService
+    this.logger = this.systemService.logger
+    this.logger.log('info', 'Create message consumer')
+    this.create()
+  }
+
   cleanup () {
     this.logger = null
     this.systemService = null
   }
 
   // Overwrite needs to setup with callback to this.systemService.processMessage(message) during new message received
-  create (systemService) {
-    this.systemService = systemService
-    this.logger = this.systemService.logger
-    this.logger.log('info', 'Create message consumer')
+  create () {
     // Create callback to this.systemService.processMessage(message)
   }
 
