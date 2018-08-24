@@ -37,7 +37,7 @@ const systemService = require('system-service')
 const { SystemService, Logger, MessageConsumer } = systemService
 ```
 
-## MessageConsumer
+## <a name="messageConsumer"></a>MessageConsumer
 - MessageConsumer is base class, which uses for connecting with SystemService.  The derived class can be overwritten by the following methods:
 
 | Method   | Description                                                                                                                  |
@@ -49,7 +49,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | stop     | Implement how to stop the 3rd party consumer to pickup any message                                                           |
 | cleanup  | Implement any cleanup after messageConsumer's stop method is triggered                                                       |
 
-## SystemService
+## <a name="systemService"></a>SystemService
 - SystemService is a message engine, which handles start and terminate the consumer
 
 | Method | Description                      |
@@ -58,6 +58,8 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | stop   | Service stop to receive message  |
 
 # <a name="diagram"></a>Diagram
+
+- `General usage`: Create a dervied class as ATypeConsumer from MessageConsumer.  Inside ATypeConsumer, configures it using the 3rd party consumer under create() and overrides any <a href="#messageConsumer">methods</a> fitting for your use case.
 
 | Layout |
 |--------|
