@@ -29,7 +29,7 @@ class MockConsumer extends MessageConsumer {
 
   internalProcess () {
     if (this.messages.length > 0) {
-      this.systemService.processMessage(this.messages[0])
+      this.service().processMessage(this.messages[0])
       this.messages.shift()
     }
     this.simpleTimer = setTimeout(() => { this.internalProcess() }, 500)

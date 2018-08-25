@@ -6,6 +6,10 @@ class MessageConsumer {
     this.logger = null
   }
 
+  service () {
+    return this.systemService
+  }
+
   setup (systemService) {
     this.systemService = systemService
     this.logger = this.systemService.logger

@@ -25,14 +25,14 @@
 
 -------
 
-# <a name="install"></a>Install  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="install"></a>Install
 **Install via npm:**
 ``` bash
 npm install system-service --save
 ```
 
 
-# <a name="definition"></a>Definition  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="definition"></a>Definition
 ``` js
 const systemService = require('system-service')
 const { SystemService, Logger, MessageConsumer } = systemService
@@ -43,12 +43,13 @@ const { SystemService, Logger, MessageConsumer } = systemService
 
 | Method   | Description                                                                                                                  |
 |----------|------------------------------------------------------------------------------------------------------------------------------|
-| create   | Implement to connect the 3rd party consumer (e.g. RabbitMQ, kafka, etc) with callback to this.systemService.processMessage   |
+| create   | Implement to connect the 3rd party consumer (e.g. RabbitMQ, kafka, etc) with callback to this.service().processMessage       |
 | validate | Implement custom validation for any received message. If the message is invalid, then throw exception (or external handling) |
 | process  | Implement how to prcoess the valid message                                                                                   |
 | start    | Implement to start the 3rd party consumer                                                                                    |
 | stop     | Implement how to stop the 3rd party consumer to pickup any message                                                           |
 | cleanup  | Implement any cleanup after messageConsumer's stop method is triggered                                                       |
+| service  | Get the currency SystemService instance                                                                                      |
 
 ## <a name="systemService"></a>SystemService
 - SystemService is a message engine, which handles start and terminate the consumer
@@ -58,7 +59,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | start  | Service start to receive message |
 | stop   | Service stop to receive message  |
 
-# <a name="diagram"></a>Diagram  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="diagram"></a>Diagram
 
 - `General usage`: Create a dervied class as ATypeConsumer from MessageConsumer.  Inside ATypeConsumer, configures it using the 3rd party consumer under create() and overrides any <a href="#messageConsumer">methods</a> fitting for your use case.
 
@@ -72,7 +73,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 |----------|
 |<div align="center"><img src="./docs/workflow.png" alt="Workflow" width="657" /></div>|
 
-# <a name="get-start"></a>Get Start  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="get-start"></a>Get Start
 Setup message cosumer
 ``` js
 const mq = require('amqplib/callback_api')
@@ -84,23 +85,24 @@ const systemService = require('system-service')
 const { MessageConsumer } = systemService
 
 function errHandler (err) {
-  // TODO: logging or exist ...
+  // TODO: logging or exist program ...
 }
 
 function MQConnect (conn, queueName, handler) {
-  return function (err, ch) {
+  const mQConn = function (err, ch) {
     if (err !== null) {
       errHandler(err)
     } else {
       ch.assertQueue(queueName)
       ch.consume(queueName, function (msg) {
         if (msg !== null) {
-          handler(msg)
+          handler(msg)s
           ch.ack(msg)
         }
       })
     }
   }
+  return mQConn
 }
 
 class DemoConsumer extends MessageConsumer {
@@ -120,8 +122,8 @@ class DemoConsumer extends MessageConsumer {
       } else {
         this.conn = conn
 
-        // config the mq consume to call this.systemService.processMessage
-        this.on_open = MQConnect(conn, this.queueName, this.systemService.processMessage)
+        // config the mq consume to call this.service().processMessage
+        this.on_open = MQConnect(conn, this.queueName, this.service().processMessage)
       }
     })
   }
@@ -163,7 +165,7 @@ const service = new SystemService(config, new DemoConsumer())
 service.start()
 ```
 
-# <a name="advance"></a>Advance  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="advance"></a>Advance
 
 > `Create custom system service`
 
@@ -175,5 +177,5 @@ service.start()
 |--------|
 |<div align="center"><img src="./docs/advance-system-service.png" alt="Layout" width="657" /></div>|
 
-# <a name="license"></a>License  <a href="#system-service">^</a>
+# <a href="#system-service">^</a><a name="license"></a>License
 MIT

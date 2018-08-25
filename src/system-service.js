@@ -1,5 +1,7 @@
 'use strict'
 
+const uuidv4 = require('uuid/v4')
+
 const systemLogger = require('system-logger')
 const { Logger } = systemLogger
 
@@ -33,6 +35,7 @@ function createLogger (config) {
 
 class SystemService {
   constructor (config, messageConsumer) {
+    this.id = uuidv4()
     this.logger = createLogger(config)
     this.config = config
     this.consumer = null

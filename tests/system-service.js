@@ -17,6 +17,8 @@ describe('system-service Tests', function () {
     it('Pass no config ctor', function () {
       const service = new SystemService(null)
       expect(service.config).to.equal(null)
+      expect(service.id).not.to.equal(null)
+      expect(typeof service.id).not.to.equal('undefinded')
     })
 
     it('Pass with config', function () {
@@ -24,6 +26,8 @@ describe('system-service Tests', function () {
       const service = new SystemService(config)
       expect(service.config).not.to.equal(null)
       expect(service.config.log).not.to.equal(null)
+      expect(service.id).not.to.equal(null)
+      expect(typeof service.id).not.to.equal('undefinded')
     })
 
     describe('Valid config log', function () {
