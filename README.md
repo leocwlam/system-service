@@ -19,6 +19,7 @@
     <a href="#definition">Definition</a> &bull;
     <a href="#diagram">Diagram</a> &bull;
     <a href="#get-start">Get Start</a> &bull;
+    <a href="#advance">Advance</a> &bull;
     <a href="#license">License</a>
 </p>
 
@@ -63,50 +64,49 @@ const { SystemService, Logger, MessageConsumer } = systemService
 
 | Layout |
 |--------|
-|<div align="center"><img src="./docs/system-service.png" /></div>|
+|<div align="center"><img src="./docs/system-service.png" alt="Layout" width="657" /></div>|
 
 - Inside handling
 
 | Workflow |
 |----------|
-|<div align="center"><img src="./docs/workflow.png" /></div>|
+|<div align="center"><img src="./docs/workflow.png" alt="Workflow" width="657" /></div>|
 
 # <a name="get-start"></a>Get Start
 Setup message cosumer
 ``` js
 const mq = require('amqplib/callback_api')
 
+const URI = 'amqp://guest:guest@localhost:5672//'
+const QUEUENAME = 'Demo'
+
 const systemService = require('system-service')
 const { MessageConsumer } = systemService
 
-function errHandler(err) {
+function errHandler (err) {
   // TODO: logging or exist ...
 }
 
-function MQConnect(conn, queueName, handler) {
-  const on_open =  function (err, ch) {
+function MQConnect (conn, queueName, handler) {
+  return function (err, ch) {
     if (err !== null) {
       errHandler(err)
     } else {
       ch.assertQueue(queueName)
-      ch.consume(queueName, function(msg) {
+      ch.consume(queueName, function (msg) {
         if (msg !== null) {
-          handler(msg);
-          ch.ack(msg);
+          handler(msg)
+          ch.ack(msg)
         }
       })
     }
   }
-
-  return on_open
 }
 
 class DemoConsumer extends MessageConsumer {
-  const URI = 'amqp://guest:guest@localhost:5672//'
-  const QUEUENAME = 'Demo'
   constructor () {
     super()
-    this.uri =  URI
+    this.uri = URI
     this.queueName = QUEUENAME
     this.conn = null
     this.on_open = null
@@ -114,14 +114,14 @@ class DemoConsumer extends MessageConsumer {
 
   create () {
     super.create()
-    mq.connect(this.uri, function(err, conn) {
+    mq.connect(this.uri, function (err, conn) {
       if (err !== null) {
-        errHandler(err);
+        errHandler(err)
       } else {
         this.conn = conn
 
         // config the mq consume to call this.systemService.processMessage
-        this.on_open =  MQConnect(conn, this.queueName, this.systemService.processMessage);
+        this.on_open = MQConnect(conn, this.queueName, this.systemService.processMessage)
       }
     })
   }
@@ -145,7 +145,7 @@ class DemoConsumer extends MessageConsumer {
     const ok = this.conn.createChannel(this.on_open)
 
     if (ok === null) {
-      errHandle(new Error('Fail: To create MQ channel'))
+      errHandler(new Error('Fail: To create MQ channel'))
     }
   }
 }
@@ -157,11 +157,23 @@ module.exports.DemoConsumer = DemoConsumer
 const systemService = require('system-service')
 const { SystemService, Logger } = systemService
 
-const config = {log: {config :{level: Logger.Level.error}}}
+const config = {log: {config: {level: Logger.Level.error}}}
 const service = new SystemService(config, new DemoConsumer())
 
 service.start()
 ```
+
+# <a name="advance"></a>Advance
+
+> `Create custom system service`
+
+  - `Cache` : Add service cache logic
+  - `Multiple services` : Work with other system services
+  - `Security` : Inject the security logic and apply at consumer / use between system services communication
+
+| Layout |
+|--------|
+|<div align="center"><img src="./docs/advance-system-service.png" alt="Layout" width="657" /></div>|
 
 # <a name="license"></a>License
 MIT
