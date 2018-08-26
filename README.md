@@ -65,13 +65,13 @@ const { SystemService, Logger, MessageConsumer } = systemService
 
 | Layout |
 |--------|
-|<div align="center"><img src="./docs/system-service.png" alt="Layout" width="657" /></div>|
+|![Layout](https://raw.githubusercontent.com/leocwlam/system-service/master/docs/system-service.png)|
 
 - Inside handling
 
 | Workflow |
 |----------|
-|<div align="center"><img src="./docs/workflow.png" alt="Workflow" width="657" /></div>|
+|![Workflow](https://raw.githubusercontent.com/leocwlam/system-service/master/docs/workflow.png)|
 
 # <a href="#system-service">^</a><a name="get-start"></a>Get Start
 Setup message cosumer
@@ -175,7 +175,7 @@ service.start()
 
 | Layout |
 |--------|
-|<div align="center"><img src="./docs/advance-system-service.png" alt="Layout" width="657" /></div>|
+|![Advance](https://raw.githubusercontent.com/leocwlam/system-service/master/docs/advance-system-service.png)|
 
 # <a href="#system-service">^</a><a name="license"></a>License
 MIT
