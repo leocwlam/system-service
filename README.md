@@ -39,7 +39,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 ```
 
 ## <a name="messageConsumer"></a>MessageConsumer
-- MessageConsumer is base class, which uses for connecting with SystemService.  The derived class can be overwritten by the following methods:
+MessageConsumer is base class, which uses for connecting with SystemService.  The derived class can be overwritten by the following methods:
 
 | Method   | Description                                                                                                                  |
 |----------|------------------------------------------------------------------------------------------------------------------------------|
@@ -52,7 +52,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 | service  | Get the currency SystemService instance                                                                                      |
 
 ## <a name="systemService"></a>SystemService
-- SystemService is a message engine, which handles start and terminate the consumer
+SystemService is a message engine, which handles start and terminate the consumer
 
 | Method | Description                      |
 |--------|----------------------------------|
@@ -74,7 +74,7 @@ const { SystemService, Logger, MessageConsumer } = systemService
 |![Workflow](https://raw.githubusercontent.com/leocwlam/system-service/master/docs/workflow.png)|
 
 # <a href="#system-service">^</a><a name="get-start"></a>Get Start
-Setup message cosumer
+- Setup message cosumer
 ``` js
 const mq = require('amqplib/callback_api')
 
@@ -155,6 +155,8 @@ class DemoConsumer extends MessageConsumer {
 module.exports.DemoConsumer = DemoConsumer
 ```
 
+- Spin up Service
+
 ``` js
 const systemService = require('system-service')
 const { SystemService, Logger } = systemService
@@ -165,13 +167,19 @@ const service = new SystemService(config, new DemoConsumer())
 service.start()
 ```
 
+- Stop Service
+
+``` js
+service.stop()
+```
+
 # <a href="#system-service">^</a><a name="advance"></a>Advance
 
-> `Create custom system service`
+`Create custom system service`
 
-  - `Cache` : Add service cache logic
-  - `Multiple services` : Work with other system services
-  - `Security` : Inject the security logic and apply at consumer / use between system services communication
+- `Cache` : Add service cache logic
+- `Multiple services` : Work with other system services
+- `Security` : Inject the security logic and apply at consumer / use between system services communication
 
 | Layout |
 |--------|
