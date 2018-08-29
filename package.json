@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/leocwlam/system-service#readme",
   "dependencies": {
-    "system-logger": "^2.0.0",
+    "system-logger": "^2.1.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
