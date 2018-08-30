@@ -178,8 +178,8 @@ service.stop()
 `Create custom system service`
 
 - `Cache` : Add service cache logic
-- `Multiple services` : Work with other system services
 - `Security` : Inject the security logic and apply at consumer / use between system services communication
+- `Multiple services` : Work with other system services (`TRY NOT TO` by Single Responsibility Principle)
 
 | Layout |
 |--------|
