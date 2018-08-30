@@ -53,7 +53,7 @@ class SystemService {
     try {
       this.validateMessage(message)
     } catch (error) {
-      this.logger.log('error', 'Fail validMessage', {Error: error.message, message: message})
+      this.logger.log('error', 'Fail validMessage', { Error: error.message, message: message })
     }
     this.messageConsumer.process(message)
   }

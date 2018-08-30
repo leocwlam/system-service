@@ -161,7 +161,7 @@ module.exports.DemoConsumer = DemoConsumer
 const systemService = require('system-service')
 const { SystemService, Logger } = systemService
 
-const config = {log: {config: {level: Logger.Level.error}}}
+const config = { log: { config: { level: Logger.Level.error } } }
 const service = new SystemService(config, new DemoConsumer())
 
 service.start()

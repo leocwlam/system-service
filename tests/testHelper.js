@@ -8,9 +8,9 @@ const generateCorrelationId = function () {
 
 const generateMessage = function (title, action, detail) {
   if ((detail === null) || (typeof detail === 'undefined')) {
-    return {cid: generateCorrelationId(), content: {title: title, action: action, detail: detail}}
+    return { cid: generateCorrelationId(), content: { title: title, action: action, detail: detail } }
   }
-  return {cid: generateCorrelationId(), content: {title: title, action: action}}
+  return { cid: generateCorrelationId(), content: { title: title, action: action } }
 }
 
 module.exports.correlationId = generateCorrelationId

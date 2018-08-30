@@ -22,7 +22,7 @@ describe('system-service Tests', function () {
     })
 
     it('Pass with config', function () {
-      const config = {log: {}}
+      const config = { log: {} }
       const service = new SystemService(config)
       expect(service.config).not.to.equal(null)
       expect(service.config.log).not.to.equal(null)
@@ -32,10 +32,10 @@ describe('system-service Tests', function () {
 
     describe('Valid config log', function () {
       const testCases = [
-        {description: `Test only with config log without any setting parameters`, config: {log: {config: {}}}, expectServiceLogLevel: 'error'},
-        {description: `Test only with file log without any setting parameters`, config: {log: {file: {}}}, expectServiceLogLevel: 'info'},
-        {description: `Test only with source log  without any setting parameters`, config: {log: {source: {}}}, expectServiceLogLevel: 'info'},
-        {description: `Test only with config log with log level parameter`, config: {log: {config: {level: Logger.Level.debug}}}, expectServiceLogLevel: 'debug'}
+        { description: `Test only with config log without any setting parameters`, config: { log: { config: {} } }, expectServiceLogLevel: 'error' },
+        { description: `Test only with file log without any setting parameters`, config: { log: { file: {} } }, expectServiceLogLevel: 'info' },
+        { description: `Test only with source log  without any setting parameters`, config: { log: { source: {} } }, expectServiceLogLevel: 'info' },
+        { description: `Test only with config log with log level parameter`, config: { log: { config: { level: Logger.Level.debug } } }, expectServiceLogLevel: 'debug' }
       ]
       testCases.forEach(function (testCase) {
         it(`${testCase.description}`, function () {
@@ -59,7 +59,7 @@ describe('system-service Tests', function () {
 
   describe('Procss message Tests', function () {
     describe('Fail Procss message Tests without messageConsumer', function () {
-      const service = new SystemService({log: {config: {silent: true}}})
+      const service = new SystemService({ log: { config: { silent: true } } })
       it('ProcessMessage undefinded message throw exception', function () {
         expect(() => service.processMessage()).to.throw(Error)
       })
@@ -68,17 +68,17 @@ describe('system-service Tests', function () {
       })
 
       it('ProcessMessage object message throw exception', function () {
-        expect(() => service.processMessage(testHelper.message('test', 'add', {type: 'customer', name: 'tester'}))).to.throw(Error)
+        expect(() => service.processMessage(testHelper.message('test', 'add', { type: 'customer', name: 'tester' }))).to.throw(Error)
       })
 
       it('ProcessMessage string message throw exception', function () {
-        expect(() => service.processMessage(JSON.stringify(testHelper.message('test', 'add', {type: 'customer', name: 'tester'})))).to.throw(Error)
+        expect(() => service.processMessage(JSON.stringify(testHelper.message('test', 'add', { type: 'customer', name: 'tester' })))).to.throw(Error)
         expect(() => service.processMessage(JSON.stringify(testHelper.message('test', 'add')))).to.throw(Error)
       })
     })
 
     describe('Procss message Tests with messageConsumer', function () {
-      const service = new SystemService({log: {config: {silent: true}}}, new MessageConsumer())
+      const service = new SystemService({ log: { config: { silent: true } } }, new MessageConsumer())
       it('ProcessMessage undefinded message without throw exception (Fail on validateMessage)', function () {
         service.processMessage()
       })
@@ -87,11 +87,11 @@ describe('system-service Tests', function () {
       })
 
       it('ProcessMessage object message without throw exception', function () {
-        service.processMessage(testHelper.message('test', 'add', {type: 'customer', name: 'tester'}))
+        service.processMessage(testHelper.message('test', 'add', { type: 'customer', name: 'tester' }))
       })
 
       it('ProcessMessage string message without throw exception', function () {
-        service.processMessage(JSON.stringify(testHelper.message('test', 'add', {type: 'customer', name: 'tester'})))
+        service.processMessage(JSON.stringify(testHelper.message('test', 'add', { type: 'customer', name: 'tester' })))
         service.processMessage(JSON.stringify(testHelper.message('test', 'add')))
       })
     })
@@ -99,13 +99,13 @@ describe('system-service Tests', function () {
 
   describe('Service Start And End Tests', function () {
     it('Fail service start and stop without consumer', function () {
-      const service = new SystemService({log: {config: {level: Logger.Level.info, silent: true}}})
+      const service = new SystemService({ log: { config: { level: Logger.Level.info, silent: true } } })
       expect(() => service.start()).to.throw(Error)
       expect(() => service.stop()).to.throw(Error)
     })
 
     it('Pass with config', function () {
-      const service = new SystemService({log: {config: {level: Logger.Level.info, silent: true}}}, new MessageConsumer())
+      const service = new SystemService({ log: { config: { level: Logger.Level.info, silent: true } } }, new MessageConsumer())
       service.start()
       service.stop()
     })
@@ -113,7 +113,7 @@ describe('system-service Tests', function () {
     describe('Check service behavior', function () {
       it('start behavior will call create', function () {
         const mockConsumer = new consumer.MockConsumer()
-        const service = new SystemService({log: {config: {level: Logger.Level.info, silent: true}}}, mockConsumer)
+        const service = new SystemService({ log: { config: { level: Logger.Level.info, silent: true } } }, mockConsumer)
         service.start()
         const report = mockConsumer.behaviorReport()
         expect(report.isStartCalled).to.equal(true)
@@ -127,7 +127,7 @@ describe('system-service Tests', function () {
 
       it('stop behavior will call cleanup', function () {
         const mockConsumer = new consumer.MockConsumer()
-        const service = new SystemService({log: {config: {level: Logger.Level.info, silent: true}}}, mockConsumer)
+        const service = new SystemService({ log: { config: { level: Logger.Level.info, silent: true } } }, mockConsumer)
         service.start()
         mockConsumer.reportReset()
         service.stop()
@@ -142,7 +142,7 @@ describe('system-service Tests', function () {
 
       it('receive message behavior', function () {
         const mockConsumer = new consumer.MockConsumer()
-        const service = new SystemService({log: {config: {level: Logger.Level.info, silent: true}}}, mockConsumer)
+        const service = new SystemService({ log: { config: { level: Logger.Level.info, silent: true } } }, mockConsumer)
         service.start()
         mockConsumer.reportReset()
         mockConsumer.addInternalMessage('Simple Test')
