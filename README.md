@@ -60,7 +60,6 @@ SystemService is a message engine, which handles start and terminate the consume
 | stop   | Service stop to receive message  |
 
 # <a href="#system-service">^</a><a name="diagram"></a>Diagram
-
 - `General usage`: Create a dervied class as ATypeConsumer from MessageConsumer.  Inside ATypeConsumer, configures it using the 3rd party consumer under create() and overrides any <a href="#messageConsumer">methods</a> fitting for your use case.
 
 | Layout |
@@ -75,6 +74,7 @@ SystemService is a message engine, which handles start and terminate the consume
 
 # <a href="#system-service">^</a><a name="get-start"></a>Get Start
 - Setup message cosumer
+
 ``` js
 const mq = require('amqplib/callback_api')
 
