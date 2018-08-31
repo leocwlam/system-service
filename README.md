@@ -60,7 +60,7 @@ SystemService is a message engine, which handles start and terminate the consume
 | stop   | Service stop to receive message  |
 
 ## <a name="logger"></a>Logger
-logger can be used in both MessageConsumer and SystemService's derived classes
+logger can be used in both MessageConsumer and SystemService's derived classes <br />
 `this.logger.log(level, message, options)`
 
 | Parameter | Description                                                                                  |
