@@ -52,12 +52,22 @@ MessageConsumer is base class, which uses for connecting with SystemService.  Th
 | service  | Get the currency SystemService instance                                                                                      |
 
 ## <a name="systemService"></a>SystemService
-SystemService is a message engine, which handles start and terminate the consumer
+SystemService is a message engine, which handles start and terminate the consumer by the following methods:
 
 | Method | Description                      |
 |--------|----------------------------------|
 | start  | Service start to receive message |
 | stop   | Service stop to receive message  |
+
+## <a name="logger"></a>Logger
+logger can be used in both MessageConsumer and SystemService's derived classes
+`this.logger.log(level, message, options)`
+
+| Parameter | Description                                                                                  |
+|-----------|----------------------------------------------------------------------------------------------|
+| level     | Logging level representing priorities (`error`, `warn`, `info`, `verbose`, `debug`, `silly`) |
+| message   | message                                                                                      |
+| options   | optional information                                                                         |
 
 # <a href="#system-service">^</a><a name="diagram"></a>Diagram
 - `General usage`: Create a dervied class as ATypeConsumer from MessageConsumer.  Inside ATypeConsumer, configures it using the 3rd party consumer under create() and overrides any <a href="#messageConsumer">methods</a> fitting for your use case.
@@ -131,6 +141,7 @@ class DemoConsumer extends MessageConsumer {
   validate (message) {
     super.validate(message)
     if ((message.cId === null) || (typeof message.cId === 'undefined')) {
+      this.logger.log('error', 'message is missing cId', message)
       throw new Error('Missing Correlation Id')
     }
   }
@@ -139,7 +150,7 @@ class DemoConsumer extends MessageConsumer {
   process (message) {
     super.process(message)
     // TODO: Implement handle message
-    this.logger.log('info', 'Start process', message)
+    this.logger.log('verbose', 'Start process', message)
   }
 
   start () {
