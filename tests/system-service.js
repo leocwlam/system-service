@@ -32,10 +32,10 @@ describe('system-service Tests', function () {
 
     describe('Valid config log', function () {
       const testCases = [
-        { description: `Test only with config log without any setting parameters`, config: { log: { config: {} } }, expectServiceLogLevel: 'error' },
-        { description: `Test only with file log without any setting parameters`, config: { log: { file: {} } }, expectServiceLogLevel: 'info' },
-        { description: `Test only with source log  without any setting parameters`, config: { log: { source: {} } }, expectServiceLogLevel: 'info' },
-        { description: `Test only with config log with log level parameter`, config: { log: { config: { level: Logger.Level.debug } } }, expectServiceLogLevel: 'debug' }
+        { description: 'Test only with config log without any setting parameters', config: { log: { config: {} } }, expectServiceLogLevel: 'error' },
+        { description: 'Test only with file log without any setting parameters', config: { log: { file: {} } }, expectServiceLogLevel: 'info' },
+        { description: 'Test only with source log  without any setting parameters', config: { log: { source: {} } }, expectServiceLogLevel: 'info' },
+        { description: 'Test only with config log with log level parameter', config: { log: { config: { level: Logger.Level.debug } } }, expectServiceLogLevel: 'debug' }
       ]
       testCases.forEach(function (testCase) {
         it(`${testCase.description}`, function () {
