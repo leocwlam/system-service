@@ -21,7 +21,7 @@
   "homepage": "https://github.com/leocwlam/system-service#readme",
   "dependencies": {
     "system-logger": "^2.1.3",
-    "uuid": "^8.1.0"
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
