@@ -2,7 +2,7 @@
 > Provide the basic service framework to help initial service implementation.  It can be easy to inject any message framework and has built-in logging mechanism.
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/leocwlam/system-service/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/leocwlam/system-service.svg?branch=master)](https://travis-ci.org/leocwlam/system-service)
+[![Build Status](https://travis-ci.com/leocwlam/system-service.svg?branch=master)](https://travis-ci.com/leocwlam/system-service)
 [![Coverage Status](https://coveralls.io/repos/github/leocwlam/system-service/badge.svg?branch=master)](https://coveralls.io/github/leocwlam/system-service?branch=master)
 [![Dependency Status](https://david-dm.org/leocwlam/system-service.svg)](https://david-dm.org/leocwlam/system-service)
 [![devDependency Status](https://david-dm.org/leocwlam/system-service/dev-status.svg)](https://david-dm.org/leocwlam/system-service?type=dev)
